@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  printf("Please enter some text: ");
+  char* input = getline(); 
+
+  char* pointer;
+  char* output = strtok_r(input, ' ', &pointer);
+
+  while(output != NULL) {
+    printf("%s\n", output);
+    output = strtok_r(NULL, ' ', &pointer);
+  }
+
+  return 0;
+}
