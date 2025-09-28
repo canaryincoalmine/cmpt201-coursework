@@ -2,21 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-const char *comp = "print\n";
+const char *comp = "print";
 
 void printInput(char **stringList, int i) {
-  for (int n = 1; n < 4; ++n) {
-    int curr = (i + n) % 5;
-    if (stringList[curr] != NULL) {
-      i = curr;
-      break;
-    }
-  }
-
   for (int n = 0; n < 5; ++n) {
     int curr = (i + n) % 5;
-    if (stringList[curr] != NULL)
-      printf("%s", stringList[curr]);
+    if(stringList[curr] != NULL)
+      printf("%s\n", stringList[curr]);
   }
 }
 
@@ -34,21 +26,20 @@ void input(char **stringList, int i) {
     free(stringList[i]);
   stringList[i] = strdup(buffer);
 
-  if (strcmp(buffer, comp) == 0)
+  if (strcmp(buffer, comp) != 0)
     printInput(stringList, i);
 }
 
 int main() {
   int numStrings = 5;
   char **stringList = (char **)malloc(numStrings * sizeof(char *));
-
-  for (int i = 0; i < numStrings; ++i)
+  
+  for(int i = 0; i < numStrings; ++i)
     stringList[i] = NULL;
 
   int i = 0;
 
   while (1) {
-    printf("Enter input: ");
     input(stringList, i);
     ++i;
     i = i % 5;

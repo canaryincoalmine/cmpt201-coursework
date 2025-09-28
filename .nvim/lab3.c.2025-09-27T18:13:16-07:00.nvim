@@ -5,14 +5,6 @@
 const char *comp = "print\n";
 
 void printInput(char **stringList, int i) {
-  for (int n = 1; n < 4; ++n) {
-    int curr = (i + n) % 5;
-    if (stringList[curr] != NULL) {
-      i = curr;
-      break;
-    }
-  }
-
   for (int n = 0; n < 5; ++n) {
     int curr = (i + n) % 5;
     if (stringList[curr] != NULL)
