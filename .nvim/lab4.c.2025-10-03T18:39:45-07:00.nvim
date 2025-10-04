@@ -1,0 +1,27 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+int main() {
+  void *start_address = sbrk(256);
+
+  struct header *block_one = (struct header *)start_address;
+  block_one->size = 128;
+  
+  struct header *block_two = (struct header *)start_address + 128;
+
+
+  int size = sizeof(struct header);
+
+  memset(start_address + size, 0, 128 - size);
+
+  printf("first block:  %p\n", block_one);
+
+  return 0;
+}

@@ -1,0 +1,38 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <inttypes.h>
+
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+int main() {
+  void *start_address = sbrk(256);
+
+  struct header *block_one = (struct header *)start_address;
+  block_one->size = 128;
+  block_one->next = NULL;
+
+  void *start_address_two = start_address + 128;
+
+  struct header *block_two = (struct header *)start_address_two;
+  block_two->size = 128;
+  block_two->next = block_one;
+
+  int size = sizeof(struct header);
+
+  memset(start_address + size, 0, 128 - size);
+  memset(start_address_two + size, 1, 128 - size);
+
+  printf("first block:        %p\n", block_one);
+  printf("second block:       %p\n", block_two);
+  printf("first block size:   %" PRIu64 "\n", block_one->size);
+  printf("first block next:   %p\n", block_one->next);
+  printf("second block size:  %" PRIu64 "\n", block_two->size);
+  printf("second block next:  %p\n", block_two->next);
+
+  return 0;
+}
