@@ -41,8 +41,8 @@ int main() {
   memset(start_address + size, 0, 128 - size);
   memset(start_address_two + size, 1, 128 - size);
 
-  print_out("first block:        %p\n", &block_one, sizeof(block_one));
-  print_out("second block:       %p\n", &block_two, sizeof(block_two));
+  print_out("first block:        %p\n", block_one, sizeof(block_one));
+  print_out("second block:       %p\n", block_two, sizeof(block_two));
   print_out("first block size:   %" PRIu64 "\n", &(block_one->size),
             sizeof(block_one->size));
   print_out("first block next:   %p\n", &(block_one->next),
