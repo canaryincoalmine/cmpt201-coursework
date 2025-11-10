@@ -33,10 +33,10 @@ static void add_word_counts_in_chunk(count_map_t *map, word_t *words,
 
   for (size_t i = 0; i < num_words; i++) {
     word_count_entry_t *w = NULL;
-    HASH_FIND_STR(*map, words[i], w);
-
     if (lock)
       pthread_mutex_lock(lock);
+    HASH_FIND_STR(*map, words[i], w);
+
     if (w) {
       w->count++;
     } else {
