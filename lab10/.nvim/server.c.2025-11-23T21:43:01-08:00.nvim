@@ -190,8 +190,8 @@ static void *run_acceptor(void *args) {
         client_args[num_clients].list_lock = aargs->list_lock;
 
         // TODO: Create a new thread to handle the client
-        pthread_create(&threads[num_clients], NULL,
-                       (void *)&client_args[num_clients], run_client);
+        pthread_create(&threads[num_clients], NULL, (void *)&client_args[num_clients],
+                       run_client);
         ++num_clients;
       }
     }
